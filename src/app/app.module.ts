@@ -3,12 +3,13 @@ import { NgModule } from "@angular/core";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 
 import { AppComponent } from "./app.component";
-import { ReactiveFormsModule } from "@angular/forms";
+import { ReactiveFormsModule, FormsModule } from "@angular/forms";
 import { NameEditorComponent } from "./name-editor/name-editor.component";
+import { ProfileEditorComponent } from "./profile-editor/profile-editor.component";
 
 @NgModule({
-  declarations: [AppComponent, NameEditorComponent],
-  imports: [NgbModule, BrowserModule, ReactiveFormsModule],
+  declarations: [AppComponent, NameEditorComponent, ProfileEditorComponent],
+  imports: [NgbModule, BrowserModule, FormsModule, ReactiveFormsModule],
   providers: [],
   bootstrap: [AppComponent]
 })

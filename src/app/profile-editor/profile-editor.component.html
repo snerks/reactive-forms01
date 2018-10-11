@@ -1,0 +1,162 @@
+<!-- <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+
+  <label>
+    First Name:
+    <input type="text" formControlName="firstName">
+  </label>
+
+  <label>
+    Last Name:
+    <input type="text" formControlName="lastName">
+  </label>
+
+  <div formGroupName="address">
+    <h3>Address</h3>
+
+    <label>
+      Street:
+      <input type="text" formControlName="street">
+    </label>
+
+    <label>
+      City:
+      <input type="text" formControlName="city">
+    </label>
+
+    <label>
+      State:
+      <input type="text" formControlName="state">
+    </label>
+
+    <label>
+      Zip Code:
+      <input type="text" formControlName="zip">
+    </label>
+  </div>
+
+  <button type="submit" [disabled]="!profileForm.valid">Submit</button>
+
+</form> -->
+<form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+
+  <h3>Event</h3>
+
+  <div class="form-group">
+    <label for="date">Date</label>
+    <div class="input-group">
+      <input class="form-control" placeholder="yyyy-mm-dd"
+        name="dp" formControlName="date" ngbDatepicker #d="ngbDatepicker">
+      <div class="input-group-append">
+        <button class="btn btn-outline-secondary calendar" (click)="d.toggle()"
+          type="button"></button>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="venue">Venue</label>
+    <input formControlName="venue" type="text" class="form-control"
+      id="venue" aria-describedby="venueHelp" placeholder="venue"
+      required>
+    <small id="venueHelp" class="form-text text-muted">Please enter the
+      venue.</small>
+  </div>
+
+  <!-- <div class="form-group">
+    <label for="lastName">Last name</label>
+    <input formControlName="lastName" type="text" class="form-control"
+      id="lastName" aria-describedby="lastNamelHelp" placeholder="lastName">
+    <small id="lastNameHelp" class="form-text text-muted">Please enter your last
+      name.</small>
+  </div>
+
+  <div formGroupName="address">
+    <h3>Address</h3>
+
+    <div class="form-group">
+      <label for="street">Street</label>
+      <input formControlName="street" type="text" class="form-control"
+        id="street" aria-describedby="streetlHelp" placeholder="street">
+      <small id="streetHelp" class="form-text text-muted">Please enter your
+        street.</small>
+    </div>
+
+    <div class="form-group">
+      <label for="city">City</label>
+      <input formControlName="city" type="text" class="form-control"
+        id="city" aria-describedby="cityHelp" placeholder="city">
+      <small id="cityHelp" class="form-text text-muted">Please enter your
+        city.</small>
+    </div>
+
+    <div class="form-group">
+      <label for="state">State</label>
+      <input formControlName="state" type="text" class="form-control"
+        id="state" aria-describedby="stateHelp" placeholder="state">
+      <small id="stateHelp" class="form-text text-muted">Please enter your
+        state.</small>
+    </div>
+
+    <div class="form-group">
+      <label for="zip">zip</label>
+      <input formControlName="zip" type="text" class="form-control"
+        id="zip" aria-describedby="zipHelp" placeholder="zip">
+      <small id="zipHelp" class="form-text text-muted">Please enter your
+        zip.</small>
+    </div>
+  </div> -->
+  <div formArrayName="artists">
+    <h3>Artists</h3>
+
+    <!-- <div *ngFor="let artist of artists.controls; let i=index">
+      <div [formGroupName]="i">
+        <label>
+          Artist:
+          <input type="text" [formControlName]="name">
+        </label>
+      </div>
+    </div> -->
+    <!-- <div *ngFor="let artist of artists.controls; let i=index">
+      <p>
+        Value: {{ artist.value | json }}
+      </p>
+    </div> -->
+    <div *ngFor="let artist of artists.controls; let i=index">
+      <div class="form-group" [formGroupName]="i">
+        <label for="artistName">Name</label>
+        <input formControlName="name" type="text" class="form-control"
+          id="artistName" aria-describedby="artistNameHelp"
+          placeholder="artistName"
+          required>
+        <small id="artistNameHelp" class="form-text text-muted">Please enter the
+          artistName.</small>
+      </div>
+    </div>
+
+    <button (click)="addArtist()">Add Artist</button>
+  </div>
+
+  <!-- 
+    <div class="form-group">
+    <label for="exampleInputPassword1">Password</label>
+    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+  </div>
+
+  <div class="form-check">
+    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+    <label class="form-check-label" for="exampleCheck1">Check me out</label>
+  </div> 
+-->
+  <button type="submit" class="btn btn-primary" [disabled]="!profileForm.valid">Submit</button>
+</form>
+
+<!-- <p>
+  Value: {{ profileFormJson }}
+</p> -->
+<p>
+  Form Status: {{ profileForm.status }}
+</p>
+
+<p>
+  Value: {{ profileForm.value | json }}
+</p>
