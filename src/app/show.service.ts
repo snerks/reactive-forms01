@@ -12,7 +12,11 @@ export class ShowService {
   // private showsInfoUrl =
   //   "https://snerks.github.io/recommended-shows-ts01/recommended-shows.json";
 
+  private showsInfoGithubUrl =
+    "https://snerks.github.io/recommended-shows-ts01/recommended-shows.json";
+
   private showsInfoUrl = "https://api.myjson.com/bins/6blgs";
+  // private showsInfoUrl = "https://api.myjson.com/bins/BOGUS";
 
   constructor(private http: HttpClient) {}
 
@@ -27,6 +31,7 @@ export class ShowService {
     // );
 
     return this.http.get<ShowsInfo>(this.showsInfoUrl);
+    // return this.http.get<ShowsInfo>(this.showsInfoGithubUrl);
   }
 
   putShowsInfo(showsInfo: ShowsInfo): Observable<ShowsInfo> {

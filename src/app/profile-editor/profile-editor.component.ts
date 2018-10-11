@@ -58,6 +58,9 @@ export class ProfileEditorComponent implements OnInit {
     // }),
   });
 
+  isUpdating: boolean;
+  errorMessage: string;
+
   constructor(private fb: FormBuilder, private showService: ShowService) {}
 
   ngOnInit() {}
@@ -94,32 +97,85 @@ export class ProfileEditorComponent implements OnInit {
   }
 
   submitShow() {
-    // const showsInfoJsonPrefix =
-    //   "{   'lastUpdated': '2018-10-11T10:28+01:00', 'shows': [";
-    // const showsInfoJsonSuffix = "]}";
+    this.isUpdating = true;
+    this.errorMessage = null;
 
     const showJson = this.profileFormJson;
     const show = JSON.parse(showJson);
 
-    // const putJson = `${showsInfoJsonPrefix}${showJson}${showsInfoJsonSuffix}`;
-
-    // const showsInfoUrl = "https://api.myjson.com/bins/6blgs";
-
-    // const showsInfo: ShowsInfo = {
-    //   lastUpdated: new Date(),
-    //   shows: [show]
-    // };
-
-    this.showService.getShowsInfo().subscribe(showsInfo => {
-      console.log("getShowsInfo:subsrcibe");
+    const getSuccessFn = (showsInfo: ShowsInfo) => {
+      console.log("getShowsInfo:getSuccessFn");
       console.log(showsInfo);
 
+      showsInfo.lastUpdated = new Date();
       showsInfo.shows.push(show);
 
-      this.showService.putShowsInfo(showsInfo).subscribe(data => {
-        console.log("putShowsInfo:subsrcibe");
-        console.log(data);
-      });
-    });
+      const putSuccessFn = (nextShowsInfo: ShowsInfo) => {
+        console.log("putShowsInfo:successFn");
+        console.log(nextShowsInfo);
+      };
+
+      const putErrorFn = (error: any) => {
+        console.log("putShowsInfo:errorFn");
+        console.log(error);
+
+        this.errorMessage = error.message;
+      };
+
+      const putCompleteFn = () => {
+        console.log("putShowsInfo:completeFn");
+        this.isUpdating = false;
+      };
+
+      this.showService
+        .putShowsInfo(showsInfo)
+        .subscribe(putSuccessFn, putErrorFn, putCompleteFn);
+    };
+
+    const getErrorFn = (error: any) => {
+      console.log("getShowsInfo:errorFn");
+      console.log(error);
+      this.isUpdating = false;
+      this.errorMessage = error.message;
+    };
+
+    const getCompleteFn = () => {
+      console.log("getShowsInfo:completeFn");
+      this.isUpdating = false;
+    };
+
+    // this.showService.getShowsInfo().subscribe(showsInfo => {
+    //   console.log("getShowsInfo:subscribe");
+    //   console.log(showsInfo);
+
+    //   showsInfo.shows.push(show);
+
+    //   const putSuccessFn = (nextShowsInfo: ShowsInfo) => {
+    //     console.log("putShowsInfo:successFn");
+    //     console.log(nextShowsInfo);
+
+    //     // this.isUpdating = false;
+    //   };
+
+    //   const putErrorFn = (error: any) => {
+    //     console.log("putShowsInfo:errorFn");
+    //     console.log(error);
+
+    //     // this.isUpdating = false;
+    //   };
+
+    //   const putCompleteFn = () => {
+    //     console.log("putShowsInfo:completeFn");
+    //     this.isUpdating = false;
+    //   };
+
+    //   this.showService
+    //     .putShowsInfo(showsInfo)
+    //     .subscribe(putSuccessFn, putErrorFn, putCompleteFn);
+    // });
+
+    this.showService
+      .getShowsInfo()
+      .subscribe(getSuccessFn, getErrorFn, getCompleteFn);
   }
 }

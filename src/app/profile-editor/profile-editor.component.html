@@ -150,6 +150,17 @@
     (click)="submitShow()"
     [disabled]="!profileForm.valid">Submit</button>
 
+  <br />
+  <br />
+
+  <div *ngIf="isUpdating">
+    Updating...
+  </div>
+
+  <div *ngIf="errorMessage" class="alert alert-danger">
+    {{errorMessage}}
+  </div>
+
   <textarea *ngIf="!profileForm.invalid" style="width: 100%;" rows="15">{{
     profileForm.value | json }}</textarea>
 </form>
