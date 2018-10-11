@@ -3,6 +3,8 @@ import { FormGroup, FormControl } from "@angular/forms";
 import { FormBuilder, Validators, FormArray } from "@angular/forms";
 import { NgbDateAdapter } from "@ng-bootstrap/ng-bootstrap";
 import { NgbIsoDateAdapter } from "../ngb-iso-date-adapter";
+import { ShowService } from "../show.service";
+import { ShowsInfo } from "../models";
 
 @Component({
   selector: "app-profile-editor",
@@ -56,7 +58,7 @@ export class ProfileEditorComponent implements OnInit {
     // }),
   });
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private showService: ShowService) {}
 
   ngOnInit() {}
 
@@ -89,5 +91,35 @@ export class ProfileEditorComponent implements OnInit {
         name: ["", Validators.required]
       })
     );
+  }
+
+  submitShow() {
+    // const showsInfoJsonPrefix =
+    //   "{   'lastUpdated': '2018-10-11T10:28+01:00', 'shows': [";
+    // const showsInfoJsonSuffix = "]}";
+
+    const showJson = this.profileFormJson;
+    const show = JSON.parse(showJson);
+
+    // const putJson = `${showsInfoJsonPrefix}${showJson}${showsInfoJsonSuffix}`;
+
+    // const showsInfoUrl = "https://api.myjson.com/bins/6blgs";
+
+    // const showsInfo: ShowsInfo = {
+    //   lastUpdated: new Date(),
+    //   shows: [show]
+    // };
+
+    this.showService.getShowsInfo().subscribe(showsInfo => {
+      console.log("getShowsInfo:subsrcibe");
+      console.log(showsInfo);
+
+      showsInfo.shows.push(show);
+
+      this.showService.putShowsInfo(showsInfo).subscribe(data => {
+        console.log("putShowsInfo:subsrcibe");
+        console.log(data);
+      });
+    });
   }
 }

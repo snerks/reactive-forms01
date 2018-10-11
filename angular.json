@@ -48,7 +48,8 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "reactive-forms01:build"
+            "browserTarget": "reactive-forms01:build",
+            "port": 4201
           },
           "configurations": {
             "production": {

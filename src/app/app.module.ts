@@ -1,5 +1,6 @@
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
+import { HttpClientModule } from "@angular/common/http";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 
 import { AppComponent } from "./app.component";
@@ -9,7 +10,13 @@ import { ProfileEditorComponent } from "./profile-editor/profile-editor.componen
 
 @NgModule({
   declarations: [AppComponent, NameEditorComponent, ProfileEditorComponent],
-  imports: [NgbModule, BrowserModule, FormsModule, ReactiveFormsModule],
+  imports: [
+    NgbModule,
+    BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })

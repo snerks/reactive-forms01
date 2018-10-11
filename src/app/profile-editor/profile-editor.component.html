@@ -130,8 +130,6 @@
 
     <hr />
 
-    <!-- <button type="submit" class="btn btn-primary float-right"
-      [disabled]="!profileForm.valid">Submit</button> -->
   </div>
 
   <!-- <p>
@@ -146,6 +144,11 @@
   <div *ngIf="!profileForm.invalid" class="alert alert-success">
     The event details are valid!
   </div>
+
+  <button type="submit" class="btn btn-primary float-right"
+    style="margin-bottom: 15px;"
+    (click)="submitShow()"
+    [disabled]="!profileForm.valid">Submit</button>
 
   <textarea *ngIf="!profileForm.invalid" style="width: 100%;" rows="15">{{
     profileForm.value | json }}</textarea>
