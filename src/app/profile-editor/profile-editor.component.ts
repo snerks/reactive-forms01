@@ -36,6 +36,7 @@ export class ProfileEditorComponent implements OnInit {
   // }
 
   profileForm = this.fb.group({
+    addedDate: [new Date().toISOString().substring(0, 10), Validators.required],
     venue: ["", Validators.required],
     date: ["", Validators.required],
     artists: this.fb.array([

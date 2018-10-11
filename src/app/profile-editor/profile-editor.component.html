@@ -1,45 +1,7 @@
-<!-- <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+<form [formGroup]="profileForm" (ngSubmit)="onSubmit()"
+  class="needs-validation" novalidate style="margin-top: 15px;">
 
-  <label>
-    First Name:
-    <input type="text" formControlName="firstName">
-  </label>
-
-  <label>
-    Last Name:
-    <input type="text" formControlName="lastName">
-  </label>
-
-  <div formGroupName="address">
-    <h3>Address</h3>
-
-    <label>
-      Street:
-      <input type="text" formControlName="street">
-    </label>
-
-    <label>
-      City:
-      <input type="text" formControlName="city">
-    </label>
-
-    <label>
-      State:
-      <input type="text" formControlName="state">
-    </label>
-
-    <label>
-      Zip Code:
-      <input type="text" formControlName="zip">
-    </label>
-  </div>
-
-  <button type="submit" [disabled]="!profileForm.valid">Submit</button>
-
-</form> -->
-<form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
-
-  <h3>Event</h3>
+  <h5>Event Date/Venue</h5>
 
   <div class="form-group">
     <label for="date">Date</label>
@@ -51,15 +13,25 @@
           type="button"></button>
       </div>
     </div>
+    <div *ngIf="profileForm.get('date').invalid &&
+      (profileForm.get('date').dirty || profileForm.get('date').touched)"
+      class="alert alert-danger">
+      Please choose a Date.
+    </div>
   </div>
 
   <div class="form-group">
     <label for="venue">Venue</label>
     <input formControlName="venue" type="text" class="form-control"
-      id="venue" aria-describedby="venueHelp" placeholder="venue"
+      id="venue" aria-describedby="venueHelp"
       required>
-    <small id="venueHelp" class="form-text text-muted">Please enter the
-      venue.</small>
+    <!-- <small id="venueHelp" class="form-text text-muted">Please enter the
+      venue.</small> -->
+    <div *ngIf="profileForm.get('venue').invalid &&
+      (profileForm.get('venue').dirty || profileForm.get('venue').touched)"
+      class="alert alert-danger">
+      Please choose a Venue.
+    </div>
   </div>
 
   <!-- <div class="form-group">
@@ -105,8 +77,8 @@
         zip.</small>
     </div>
   </div> -->
-  <div formArrayName="artists">
-    <h3>Artists</h3>
+  <div formArrayName="artists" class="clearfix">
+    <h5>Artists</h5>
 
     <!-- <div *ngFor="let artist of artists.controls; let i=index">
       <div [formGroupName]="i">
@@ -126,14 +98,21 @@
         <label for="artistName">Name</label>
         <input formControlName="name" type="text" class="form-control"
           id="artistName" aria-describedby="artistNameHelp"
-          placeholder="artistName"
           required>
-        <small id="artistNameHelp" class="form-text text-muted">Please enter the
-          artistName.</small>
+        <!-- placeholder="artistName" -->
+        <!-- <small id="artistNameHelp" class="form-text text-muted">Please enter the
+          artistName.</small> -->
+        <div *ngIf="artist.get('name').invalid &&
+          (artist.get('name').dirty || artist.get('name').touched)"
+          class="alert alert-danger">
+          Please choose an Artist Name.
+        </div>
       </div>
     </div>
 
-    <button (click)="addArtist()">Add Artist</button>
+    <button class="btn btn-outline-dark float-right" type="button"
+      (click)="addArtist()">Add
+      Artist</button>
   </div>
 
   <!-- 
@@ -147,16 +126,39 @@
     <label class="form-check-label" for="exampleCheck1">Check me out</label>
   </div> 
 -->
-  <button type="submit" class="btn btn-primary" [disabled]="!profileForm.valid">Submit</button>
+  <div>
+
+    <hr />
+
+    <!-- <button type="submit" class="btn btn-primary float-right"
+      [disabled]="!profileForm.valid">Submit</button> -->
+  </div>
+
+  <!-- <p>
+    Form Status: {{ profileForm.status }}
+  </p> -->
+
+  <!-- <div *ngIf="profileForm.invalid &&
+    (profileForm.dirty || profileForm.touched)"
+    class="alert alert-danger">
+    Please enter the required values.
+  </div> -->
+  <div *ngIf="!profileForm.invalid" class="alert alert-success">
+    The event details are valid!
+  </div>
+
+  <textarea *ngIf="!profileForm.invalid" style="width: 100%;" rows="15">{{
+    profileForm.value | json }}</textarea>
 </form>
 
 <!-- <p>
   Value: {{ profileFormJson }}
 </p> -->
-<p>
+<!-- 
+  <p>
   Form Status: {{ profileForm.status }}
 </p>
 
-<p>
-  Value: {{ profileForm.value | json }}
-</p>
+<pre>
+  {{ profileForm.value | json }}
+</pre> -->
