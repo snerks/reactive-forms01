@@ -4,6 +4,7 @@ export interface ShowsInfo {
 }
 
 export interface Show {
+  id?: string;
   addedDate?: Date;
   isSoldOut: boolean;
   isCancelled: boolean;
@@ -27,4 +28,10 @@ export interface Artist {
   stageTime?: string;
 
   videoUrl?: string;
+}
+
+export interface VenueBts {
+  id: number;
+  name: string;
+  nameRaw: string;
 }

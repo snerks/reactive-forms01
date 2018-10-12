@@ -24,7 +24,8 @@
     <label for="venue">Venue</label>
     <input formControlName="venue" type="text" class="form-control"
       id="venue" aria-describedby="venueHelp"
-      required>
+      required
+      [ngbTypeahead]="searchVenue">
     <!-- <small id="venueHelp" class="form-text text-muted">Please enter the
       venue.</small> -->
     <div *ngIf="profileForm.get('venue').invalid &&
@@ -34,65 +35,9 @@
     </div>
   </div>
 
-  <!-- <div class="form-group">
-    <label for="lastName">Last name</label>
-    <input formControlName="lastName" type="text" class="form-control"
-      id="lastName" aria-describedby="lastNamelHelp" placeholder="lastName">
-    <small id="lastNameHelp" class="form-text text-muted">Please enter your last
-      name.</small>
-  </div>
-
-  <div formGroupName="address">
-    <h3>Address</h3>
-
-    <div class="form-group">
-      <label for="street">Street</label>
-      <input formControlName="street" type="text" class="form-control"
-        id="street" aria-describedby="streetlHelp" placeholder="street">
-      <small id="streetHelp" class="form-text text-muted">Please enter your
-        street.</small>
-    </div>
-
-    <div class="form-group">
-      <label for="city">City</label>
-      <input formControlName="city" type="text" class="form-control"
-        id="city" aria-describedby="cityHelp" placeholder="city">
-      <small id="cityHelp" class="form-text text-muted">Please enter your
-        city.</small>
-    </div>
-
-    <div class="form-group">
-      <label for="state">State</label>
-      <input formControlName="state" type="text" class="form-control"
-        id="state" aria-describedby="stateHelp" placeholder="state">
-      <small id="stateHelp" class="form-text text-muted">Please enter your
-        state.</small>
-    </div>
-
-    <div class="form-group">
-      <label for="zip">zip</label>
-      <input formControlName="zip" type="text" class="form-control"
-        id="zip" aria-describedby="zipHelp" placeholder="zip">
-      <small id="zipHelp" class="form-text text-muted">Please enter your
-        zip.</small>
-    </div>
-  </div> -->
   <div formArrayName="artists" class="clearfix">
     <h5>Artists</h5>
 
-    <!-- <div *ngFor="let artist of artists.controls; let i=index">
-      <div [formGroupName]="i">
-        <label>
-          Artist:
-          <input type="text" [formControlName]="name">
-        </label>
-      </div>
-    </div> -->
-    <!-- <div *ngFor="let artist of artists.controls; let i=index">
-      <p>
-        Value: {{ artist.value | json }}
-      </p>
-    </div> -->
     <div *ngFor="let artist of artists.controls; let i=index">
       <div class="form-group" [formGroupName]="i">
         <label for="artistName">Name</label>
@@ -115,17 +60,6 @@
       Artist</button>
   </div>
 
-  <!-- 
-    <div class="form-group">
-    <label for="exampleInputPassword1">Password</label>
-    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-  </div>
-
-  <div class="form-check">
-    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-    <label class="form-check-label" for="exampleCheck1">Check me out</label>
-  </div> 
--->
   <div>
 
     <hr />
@@ -153,6 +87,7 @@
   <br />
   <br />
 
+  <a href="https://snerks.github.io/recommended-shows-ng01/">View All Shows</a>
   <div *ngIf="isUpdating">
     Updating...
   </div>
