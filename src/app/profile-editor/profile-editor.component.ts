@@ -195,6 +195,16 @@ export class ProfileEditorComponent implements OnInit {
     });
   }
 
+  get addedWithin7DaysShows(): Show[] {
+    if (!this.showsInfo) {
+      return [];
+    }
+
+    return this.showsInfo.shows.filter(show => {
+      return this.isRecentlyAdded(show, 7);
+    });
+  }
+
   submitShow() {
     this.isUpdating = true;
     this.errorMessage = null;
