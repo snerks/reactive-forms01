@@ -1,7 +1,7 @@
 <form [formGroup]="profileForm" (ngSubmit)="onSubmit()"
   class="needs-validation" novalidate style="margin-top: 15px;">
 
-  <h5>Event Date/Venue</h5>
+  <h6>Event Date/Venue</h6>
 
   <div class="form-group">
     <label for="date">Date</label>
@@ -45,7 +45,7 @@
     {{knownArtistsMatches.length}} Known Artists Matches
   </div> -->
   <div formArrayName="artists" class="clearfix">
-    <h5>Artists</h5>
+    <h6>Artists</h6>
 
     <div *ngFor="let artist of artists.controls; let i=index">
       <div class="form-group" [formGroupName]="i">
@@ -62,9 +62,10 @@
       </div>
     </div>
 
-    <button class="btn btn-outline-dark float-right" type="button"
-      (click)="addArtist()">Add
-      Artist</button>
+    <button class="btn btn-outline-dark float-right btn-sm" type="button"
+      (click)="addArtist()">
+      Add Artist
+    </button>
   </div>
 
   <!-- <div class="form-group">
@@ -134,31 +135,25 @@
     The event details are valid!
   </div>
 
-  <button type="submit" class="btn btn-primary float-right"
+  <button type="submit" class="btn btn-primary btn-sm float-right"
     style="margin-bottom: 15px;"
     (click)="submitShow()"
-    [disabled]="!profileForm.valid">Submit</button>
+    [disabled]="!profileForm.valid">Save</button>
 
   <br />
   <br />
 </form>
 
-<div class="clearfix">
-  <div class="row">
-    <div class="col-sm">
-      <span class="badge badge-info">{{addedTodayShows.length}}</span>
-      <span> today</span>
-    </div>
+<div>
+  <div>
+    <span class="badge badge-info">{{addedTodayShows.length}}</span>
+    <span> today </span>
 
-    <div class="col-sm">
-      <span class="badge badge-info">{{addedWithin3DaysShows.length}}</span>
-      <span> 3 days</span>
-    </div>
+    <span class="badge badge-info">{{addedWithin3DaysShows.length}}</span>
+    <span> 3 days </span>
 
-    <div class="col-sm">
-      <span class="badge badge-info">{{addedWithin7DaysShows.length}}</span>
-      <span> 7 days</span>
-    </div>
+    <span class="badge badge-info">{{addedWithin7DaysShows.length}}</span>
+    <span> 7 days </span>
   </div>
 
   <hr />
