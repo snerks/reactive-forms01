@@ -40,6 +40,7 @@ export class ProfileEditorComponent implements OnInit {
   knownArtists: string[] = ["Led Zeppelin", "Frank Sinatra"];
 
   knownArtistsSearchTerm: string;
+  knownArtistsMatches: string[] = [];
 
   searchKnownArtists = (text$: Observable<string>) =>
     text$.pipe(
@@ -54,6 +55,8 @@ export class ProfileEditorComponent implements OnInit {
             : this.knownArtists
                 .filter(v => v.toLowerCase().indexOf(term.toLowerCase()) > -1)
                 .slice(0, 10);
+
+        this.knownArtistsMatches = results;
 
         return results;
       })
