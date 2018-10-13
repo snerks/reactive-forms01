@@ -98,6 +98,8 @@ export class ProfileEditorComponent implements OnInit {
 
       this.showsInfo = showsInfo;
 
+      this.sortShows(this.showsInfo);
+
       const showsArtistNamesNested = showsInfo.shows.map(show =>
         show.artists.map(artist => artist.name)
       );
@@ -212,7 +214,7 @@ export class ProfileEditorComponent implements OnInit {
     const showJson = this.profileFormJson;
     const show = JSON.parse(showJson);
 
-    const isCleanupRequired = false;
+    const isCleanupRequired = true;
 
     if (!show.id) {
       show.id = this.getNewGuidV4();
@@ -225,6 +227,11 @@ export class ProfileEditorComponent implements OnInit {
       showsInfo.shows.forEach(showForUuid => {
         if (!showForUuid.id) {
           showForUuid.id = this.getNewGuidV4();
+        }
+
+        if (!showForUuid.addedDate) {
+          // Month is zero-based : 8 = Sept
+          showForUuid.addedDate = new Date(2018, 8, 17, 12, 0, 0);
         }
       });
 
@@ -307,9 +314,15 @@ export class ProfileEditorComponent implements OnInit {
       const lhsDate = new Date(lhs.date);
       const rhsDate = new Date(rhs.date);
 
-      const result = lhsDate.getTime() - rhsDate.getTime();
+      // const result = lhsDate.getTime() - rhsDate.getTime();
+      const lhsTime = lhsDate.getTime();
+      const rhsTime = rhsDate.getTime();
 
-      return result;
+      if (lhsTime === rhsTime) {
+        return lhs.id < rhs.id ? -1 : lhs.id > rhs.id ? 1 : 0;
+      } else {
+        return lhsTime - rhsTime;
+      }
     });
   }
 }

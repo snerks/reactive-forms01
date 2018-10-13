@@ -160,9 +160,13 @@
   <hr />
 
   <div>
-    <a class="btn btn-primary btn-sm"
+    <!-- <a class="btn btn-primary btn-sm"
       href="https://snerks.github.io/recommended-shows-ng01/" role="button">View
-      All Shows ({{showsInfo ? showsInfo.shows.length : 0}})</a>
+      All Shows ({{showsInfo ? showsInfo.shows.length : 0}})</a> -->
+    <a routerLink="/list" class="btn btn-primary btn-lg btn-block" href="#"
+      role="button">
+      View All Shows ({{showsInfo ? showsInfo.shows.length : 0}})
+    </a>
   </div>
 
   <div *ngIf="isUpdating">
