@@ -214,7 +214,7 @@ export class ProfileEditorComponent implements OnInit {
     const showJson = this.profileFormJson;
     const show = JSON.parse(showJson);
 
-    const isCleanupRequired = true;
+    const isCleanupRequired = false;
 
     if (!show.id) {
       show.id = this.getNewGuidV4();
