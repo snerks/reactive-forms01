@@ -20,7 +20,20 @@
     </div>
   </div>
 
-  <div>
+  <div class="form-group">
+    <label for="venue">Venue</label>
+    <input formControlName="venue" type="text" class="form-control"
+      id="venue" aria-describedby="venueHelp"
+      required
+      [ngbTypeahead]="searchVenue">
+    <div *ngIf="profileForm.get('venue').invalid &&
+      (profileForm.get('venue').dirty || profileForm.get('venue').touched)"
+      class="alert alert-danger">
+      Please choose a Venue.
+    </div>
+  </div>
+
+  <!-- <div>
     {{knownArtists.length}} Known Artists
   </div>
 
@@ -30,9 +43,8 @@
 
   <div>
     {{knownArtistsMatches.length}} Known Artists Matches
-  </div>
-
-  <!-- <div formArrayName="artists" class="clearfix">
+  </div> -->
+  <div formArrayName="artists" class="clearfix">
     <h5>Artists</h5>
 
     <div *ngFor="let artist of artists.controls; let i=index">
@@ -53,8 +65,9 @@
     <button class="btn btn-outline-dark float-right" type="button"
       (click)="addArtist()">Add
       Artist</button>
-  </div> -->
-  <div formArrayName="artists">
+  </div>
+
+  <!-- <div formArrayName="artists">
     <h5>Artists</h5>
 
     <div *ngFor="let artist of artists.controls; let i=index">
@@ -71,38 +84,11 @@
         </div>
       </div>
     </div>
-  </div>
-
+  </div> -->
   <div>
 
     <hr />
 
-  </div>
-
-  <!-- <div class="form-group">
-    <label for="venue">Venue</label>
-    <input formControlName="venue" type="text" class="form-control"
-      id="venue" aria-describedby="venueHelp"
-      required
-      [ngbTypeahead]="searchVenue">
-    <div *ngIf="profileForm.get('venue').invalid &&
-      (profileForm.get('venue').dirty || profileForm.get('venue').touched)"
-      class="alert alert-danger">
-      Please choose a Venue.
-    </div>
-  </div> -->
-  <div class="form-group">
-    <label for="venue">Venue</label>
-    <input formControlName="venue" type="text" class="form-control"
-      id="venue" aria-describedby="venueHelp"
-      required>
-    <!-- <small id="venueHelp" class="form-text text-muted">Please enter the
-      venue.</small> -->
-    <div *ngIf="profileForm.get('venue').invalid &&
-      (profileForm.get('venue').dirty || profileForm.get('venue').touched)"
-      class="alert alert-danger">
-      Please choose a Venue.
-    </div>
   </div>
 
   <!-- <p>

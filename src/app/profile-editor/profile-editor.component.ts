@@ -110,7 +110,7 @@ export class ProfileEditorComponent implements OnInit {
 
       uniqueShowsArtistNames.sort();
 
-      // this.knownArtists = uniqueShowsArtistNames;
+      this.knownArtists = uniqueShowsArtistNames;
     };
 
     const getErrorFn = (error: any) => {
