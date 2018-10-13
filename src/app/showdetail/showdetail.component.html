@@ -1,4 +1,21 @@
-<div style="margin-top: 15px; padding-left: 15px; padding-right: 15px;">
+<!-- <h1>{{show && show.date}}</h1>
+<h1>{{show && show.venue}}</h1>
+
+<table class="table table-striped" *ngIf="show">
+  <thead>
+    <tr>
+      <th>Artists</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let artist of show.artists">
+      <td>{{artist.name}}</td>
+    </tr>
+  </tbody>
+</table> -->
+
+<div *ngIf="profileForm" style="margin-top: 15px; padding-left: 15px;
+  padding-right: 15px;">
   <form [formGroup]="profileForm" (ngSubmit)="onSubmit()"
     class="needs-validation" novalidate>
 
@@ -7,8 +24,10 @@
     <div class="form-group">
       <label for="date">Event Date</label>
       <div class="input-group">
+        <!-- Angular Bug ??? formControlName="date" throws an error on datepicker popup -->
         <input class="form-control" placeholder="yyyy-mm-dd"
-          name="dp" formControlName="date" ngbDatepicker #d="ngbDatepicker">
+          name="dp" [formControl]="profileForm.controls['date']" ngbDatepicker
+          #d="ngbDatepicker">
         <div class="input-group-append">
           <button class="btn btn-outline-secondary calendar"
             (click)="d.toggle()"
@@ -178,21 +197,5 @@
     <div *ngIf="errorMessage" class="alert alert-danger">
       {{errorMessage}}
     </div>
-
-    <!-- <hr />
-      
-        <textarea *ngIf="!profileForm.invalid" style="width: 100%;" rows="15">{{
-          profileForm.value | json }}</textarea> -->
-    <!-- <p>
-          Value: {{ profileFormJson }}
-        </p> -->
-    <!-- 
-          <p>
-          Form Status: {{ profileForm.status }}
-        </p>
-        
-        <pre>
-          {{ profileForm.value | json }}
-        </pre> -->
   </div>
 </div>

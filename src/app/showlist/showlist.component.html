@@ -56,6 +56,7 @@
           <th>Artists</th>
           <th>Venue</th>
           <th>&#160;</th>
+          <th>&#160;</th>
         </tr>
       </thead>
       <tbody>
@@ -104,6 +105,14 @@
             </span>
 
             <span *ngIf="show.notes" style="margin-right: 10px;">{{show.notes}}</span>
+          </td>
+          <td>
+            <a routerLink="/detail/{{show.id}}" class="btn btn-outline-primary
+              btn-sm btn-block"
+              href="#"
+              role="button">
+              <i class="fa fa-edit" style="margin-right: 10px;"></i> Edit
+            </a>
           </td>
         </tr>
       </tbody>
