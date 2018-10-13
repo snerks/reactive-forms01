@@ -32,7 +32,7 @@
     {{knownArtistsMatches.length}} Known Artists Matches
   </div>
 
-  <div formArrayName="artists" class="clearfix">
+  <!-- <div formArrayName="artists" class="clearfix">
     <h5>Artists</h5>
 
     <div *ngFor="let artist of artists.controls; let i=index">
@@ -42,9 +42,6 @@
           id="artistName" aria-describedby="artistNameHelp"
           required
           [ngbTypeahead]="searchKnownArtists">
-        <!-- placeholder="artistName" -->
-        <!-- <small id="artistNameHelp" class="form-text text-muted">Please enter the
-          artistName.</small> -->
         <div *ngIf="artist.get('name').invalid &&
           (artist.get('name').dirty || artist.get('name').touched)"
           class="alert alert-danger">
@@ -56,6 +53,24 @@
     <button class="btn btn-outline-dark float-right" type="button"
       (click)="addArtist()">Add
       Artist</button>
+  </div> -->
+  <div formArrayName="artists">
+    <h5>Artists</h5>
+
+    <div *ngFor="let artist of artists.controls; let i=index">
+      <div class="form-group" [formGroupName]="i">
+        <label for="artistName">Name</label>
+        <input formControlName="name" type="text" class="form-control"
+          id="artistName" aria-describedby="artistNameHelp"
+          required
+          [ngbTypeahead]="searchKnownArtists">
+        <div *ngIf="artist.get('name').invalid &&
+          (artist.get('name').dirty || artist.get('name').touched)"
+          class="alert alert-danger">
+          Please choose an Artist Name.
+        </div>
+      </div>
+    </div>
   </div>
 
   <div>
