@@ -37,10 +37,12 @@ export class ProfileEditorComponent implements OnInit {
   isUpdating: boolean;
   errorMessage: string;
 
-  knownArtists: string[] = ["Led Zeppelin", "Frank Sinatra"];
+  knownArtists: string[] = [];
 
   knownArtistsSearchTerm: string;
   knownArtistsMatches: string[] = [];
+
+  showsInfo: ShowsInfo;
 
   searchKnownArtists = (text$: Observable<string>) =>
     text$.pipe(
@@ -93,6 +95,8 @@ export class ProfileEditorComponent implements OnInit {
     const getSuccessFn = (showsInfo: ShowsInfo) => {
       console.log("getShowsInfo:getSuccessFn");
       console.log(showsInfo);
+
+      this.showsInfo = showsInfo;
 
       const showsArtistNamesNested = showsInfo.shows.map(show =>
         show.artists.map(artist => artist.name)
@@ -150,6 +154,47 @@ export class ProfileEditorComponent implements OnInit {
     );
   }
 
+  isRecentlyAdded = (show: Show, thresholdInDays = 1) => {
+    if (!show.addedDate) {
+      return false;
+    }
+
+    const addedDate = new Date(show.addedDate);
+    const currentDate = new Date();
+
+    const millisecondsSinceAdded = currentDate.getTime() - addedDate.getTime();
+
+    // const thresholdInDays = 3;
+    const millisecondsPerDay = 1000 * 60 * 60 * 24;
+    const thresholdInMilliseconds = thresholdInDays * millisecondsPerDay;
+
+    const result = millisecondsSinceAdded < thresholdInMilliseconds;
+
+    return result;
+
+    // tslint:disable-next-line:semicolon
+  };
+
+  get addedTodayShows(): Show[] {
+    if (!this.showsInfo) {
+      return [];
+    }
+
+    return this.showsInfo.shows.filter(show => {
+      return this.isRecentlyAdded(show, 1);
+    });
+  }
+
+  get addedWithin3DaysShows(): Show[] {
+    if (!this.showsInfo) {
+      return [];
+    }
+
+    return this.showsInfo.shows.filter(show => {
+      return this.isRecentlyAdded(show, 3);
+    });
+  }
+
   submitShow() {
     this.isUpdating = true;
     this.errorMessage = null;
@@ -179,6 +224,8 @@ export class ProfileEditorComponent implements OnInit {
       const putSuccessFn = (nextShowsInfo: ShowsInfo) => {
         console.log("putShowsInfo:successFn");
         console.log(nextShowsInfo);
+
+        this.showsInfo = nextShowsInfo;
       };
 
       const putErrorFn = (error: any) => {
@@ -193,6 +240,21 @@ export class ProfileEditorComponent implements OnInit {
 
         this.isUpdating = false;
       };
+
+      const isCleanupRequired = true;
+
+      if (isCleanupRequired) {
+        const cleanedShows = showsInfo.shows.filter(
+          showToFilter =>
+            !showToFilter.artists.some(
+              artist =>
+                artist.name === "Frank Sinatra" ||
+                artist.name === "Led Zeppelin"
+            )
+        );
+
+        showsInfo.shows = cleanedShows;
+      }
 
       this.showService
         .putShowsInfo(showsInfo)

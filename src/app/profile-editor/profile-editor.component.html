@@ -67,6 +67,28 @@
       Artist</button>
   </div>
 
+  <div class="form-group">
+    <label
+      for="isSoldOutCheckBox">
+      <input type="checkbox"
+        id="isSoldOutCheckBox"
+        formControlName="isSoldOut"
+        />
+      Sold Out
+    </label>
+  </div>
+
+  <div class="form-group">
+    <label
+      for="isCancelledCheckBox">
+      <input type="checkbox"
+        id="isCancelledCheckBox"
+        formControlName="isCancelled"
+        />
+      Cancelled
+    </label>
+  </div>
+
   <!-- <div formArrayName="artists">
     <h5>Artists</h5>
 
@@ -86,9 +108,7 @@
     </div>
   </div> -->
   <div>
-
     <hr />
-
   </div>
 
   <!-- <p>
@@ -112,7 +132,24 @@
   <br />
   <br />
 
-  <a href="https://snerks.github.io/recommended-shows-ng01/">View All Shows</a>
+  <div>
+    <span class="badge badge-info">{{addedTodayShows.length}}</span>
+    <span> Shows added today</span>
+  </div>
+
+  <div>
+    <span class="badge badge-info">{{addedWithin3DaysShows.length}}</span>
+    <span> Shows added in the last 3 days</span>
+  </div>
+
+  <hr />
+
+  <div>
+    <a class="btn btn-primary btn-sm"
+      href="https://snerks.github.io/recommended-shows-ng01/" role="button">View
+      All Shows ({{showsInfo ? showsInfo.shows.length : 0}})</a>
+  </div>
+
   <div *ngIf="isUpdating">
     Updating...
   </div>
@@ -120,6 +157,8 @@
   <div *ngIf="errorMessage" class="alert alert-danger">
     {{errorMessage}}
   </div>
+
+  <hr />
 
   <textarea *ngIf="!profileForm.invalid" style="width: 100%;" rows="15">{{
     profileForm.value | json }}</textarea>
