@@ -39,18 +39,24 @@ export class ProfileEditorComponent implements OnInit {
 
   knownArtists: string[] = ["Led Zeppelin", "Frank Sinatra"];
 
+  knownArtistsSearchTerm: string;
+
   searchKnownArtists = (text$: Observable<string>) =>
     text$.pipe(
       debounceTime(200),
       distinctUntilChanged(),
-      map(
-        term =>
+      map(term => {
+        this.knownArtistsSearchTerm = term;
+
+        const results =
           term.length < 2
             ? []
             : this.knownArtists
                 .filter(v => v.toLowerCase().indexOf(term.toLowerCase()) > -1)
-                .slice(0, 10)
-      )
+                .slice(0, 10);
+
+        return results;
+      })
       // tslint:disable-next-line:semicolon
     );
 
