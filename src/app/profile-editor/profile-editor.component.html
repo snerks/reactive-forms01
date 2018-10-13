@@ -1,10 +1,10 @@
 <form [formGroup]="profileForm" (ngSubmit)="onSubmit()"
   class="needs-validation" novalidate style="margin-top: 15px;">
 
-  <h6>Event Date/Venue</h6>
+  <!-- <h6>Event Date/Venue</h6> -->
 
   <div class="form-group">
-    <label for="date">Date</label>
+    <label for="date">Event Date</label>
     <div class="input-group">
       <input class="form-control" placeholder="yyyy-mm-dd"
         name="dp" formControlName="date" ngbDatepicker #d="ngbDatepicker">
@@ -16,7 +16,7 @@
     <div *ngIf="profileForm.get('date').invalid &&
       (profileForm.get('date').dirty || profileForm.get('date').touched)"
       class="alert alert-danger">
-      Please choose a Date.
+      Please choose an Event Date.
     </div>
   </div>
 
@@ -45,11 +45,11 @@
     {{knownArtistsMatches.length}} Known Artists Matches
   </div> -->
   <div formArrayName="artists" class="clearfix">
-    <h6>Artists</h6>
+    <!-- <h6>Artists</h6> -->
 
     <div *ngFor="let artist of artists.controls; let i=index">
       <div class="form-group" [formGroupName]="i">
-        <label for="artistName">Name</label>
+        <label for="artistName">Artist Name</label>
         <input formControlName="name" type="text" class="form-control"
           id="artistName" aria-describedby="artistNameHelp"
           required
@@ -131,11 +131,12 @@
     class="alert alert-danger">
     Please enter the required values.
   </div> -->
+  <!-- 
   <div *ngIf="!profileForm.invalid" class="alert alert-success">
     The event details are valid!
-  </div>
-
-  <button type="submit" class="btn btn-primary btn-sm float-right"
+  </div> 
+  -->
+  <button type="submit" class="btn btn-success btn-sm float-right"
     style="margin-bottom: 15px;"
     (click)="submitShow()"
     [disabled]="!profileForm.valid">Save</button>
@@ -147,13 +148,13 @@
 <div>
   <div>
     <span class="badge badge-info">{{addedTodayShows.length}}</span>
-    <span> today </span>
+    <span> new today </span>
 
     <span class="badge badge-info">{{addedWithin3DaysShows.length}}</span>
-    <span> 3 days </span>
+    <span> last 3 days </span>
 
     <span class="badge badge-info">{{addedWithin7DaysShows.length}}</span>
-    <span> 7 days </span>
+    <span> last 7 days </span>
   </div>
 
   <hr />
@@ -172,11 +173,10 @@
     {{errorMessage}}
   </div>
 
-  <hr />
+  <!-- <hr />
 
   <textarea *ngIf="!profileForm.invalid" style="width: 100%;" rows="15">{{
-    profileForm.value | json }}</textarea>
-
+    profileForm.value | json }}</textarea> -->
   <!-- <p>
     Value: {{ profileFormJson }}
   </p> -->

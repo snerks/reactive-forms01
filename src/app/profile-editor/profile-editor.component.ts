@@ -212,6 +212,8 @@ export class ProfileEditorComponent implements OnInit {
     const showJson = this.profileFormJson;
     const show = JSON.parse(showJson);
 
+    const isCleanupRequired = true;
+
     if (!show.id) {
       show.id = this.getNewGuidV4();
     }
@@ -227,7 +229,10 @@ export class ProfileEditorComponent implements OnInit {
       });
 
       showsInfo.lastUpdated = new Date();
-      showsInfo.shows.push(show);
+
+      if (!isCleanupRequired) {
+        showsInfo.shows.push(show);
+      }
 
       this.sortShows(showsInfo);
 
@@ -250,8 +255,6 @@ export class ProfileEditorComponent implements OnInit {
 
         this.isUpdating = false;
       };
-
-      const isCleanupRequired = true;
 
       if (isCleanupRequired) {
         const cleanedShows = showsInfo.shows.filter(
