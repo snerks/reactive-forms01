@@ -134,7 +134,6 @@ export class ProfileEditorComponent implements OnInit {
       .getShowsInfo()
       .subscribe(getSuccessFn, getErrorFn, getCompleteFn);
   }
-
   onSubmit() {
     // TODO: Use EventEmitter with form value
     // console.warn(this.profileForm.value);

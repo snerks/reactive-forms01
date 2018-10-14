@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import * as moment from "moment";
 import { ShowsInfo, Show } from "../models";
 import { ShowService } from "../show.service";
+import { ActivatedRoute } from "@angular/router";
 
 @Component({
   selector: "app-showlist",
@@ -15,9 +16,16 @@ export class ShowlistComponent implements OnInit {
 
   showPastEvents: boolean;
 
-  constructor(private showService: ShowService) {}
+  thresholdInDays: number;
+
+  constructor(
+    private showService: ShowService,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit() {
+    this.thresholdInDays = +this.route.snapshot.paramMap.get("days");
+
     this.getShowsInfo();
   }
 
@@ -59,8 +67,17 @@ export class ShowlistComponent implements OnInit {
     // tslint:disable-next-line:semicolon
   };
 
+  get inThresholdShows(): Show[] {
+    const results = this.inDateRangeShows.filter(show =>
+      this.isRecentlyAdded(show, this.thresholdInDays)
+    );
+
+    return results;
+  }
+
   get artistFilterShows(): Show[] {
-    const results = this.inDateRangeShows.filter(show => {
+    //     const results = this.inDateRangeShows.filter(show => {
+    const results = this.inThresholdShows.filter(show => {
       if (!this.artistsSearchTerm) {
         return true;
       }
@@ -97,5 +114,77 @@ export class ShowlistComponent implements OnInit {
     });
 
     return results;
+  }
+
+  getAddedInThresholdShows(thresholdInDays = 0): Show[] {
+    if (!this.showsInfo) {
+      return [];
+    }
+
+    return this.showsInfo.shows.filter(show => {
+      return this.isRecentlyAdded(show, thresholdInDays);
+    });
+  }
+
+  isRecentlyAdded = (show: Show, thresholdInDays = 0) => {
+    if (!show.addedDate) {
+      return false;
+    }
+
+    if (thresholdInDays <= 0) {
+      return true;
+    }
+
+    const addedDate = new Date(show.addedDate);
+    const currentDate = new Date();
+
+    const millisecondsSinceAdded = currentDate.getTime() - addedDate.getTime();
+
+    const millisecondsPerDay = 1000 * 60 * 60 * 24;
+    const thresholdInMilliseconds = thresholdInDays * millisecondsPerDay;
+
+    const result = millisecondsSinceAdded < thresholdInMilliseconds;
+
+    return result;
+
+    // tslint:disable-next-line:semicolon
+  };
+
+  get allShows(): Show[] {
+    if (!this.showsInfo) {
+      return [];
+    }
+
+    return this.showsInfo.shows;
+  }
+
+  get addedTodayShows(): Show[] {
+    if (!this.showsInfo) {
+      return [];
+    }
+
+    return this.showsInfo.shows.filter(show => {
+      return this.isRecentlyAdded(show, 1);
+    });
+  }
+
+  get addedWithin3DaysShows(): Show[] {
+    if (!this.showsInfo) {
+      return [];
+    }
+
+    return this.showsInfo.shows.filter(show => {
+      return this.isRecentlyAdded(show, 3);
+    });
+  }
+
+  get addedWithin7DaysShows(): Show[] {
+    if (!this.showsInfo) {
+      return [];
+    }
+
+    return this.showsInfo.shows.filter(show => {
+      return this.isRecentlyAdded(show, 7);
+    });
   }
 }

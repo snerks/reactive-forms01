@@ -1,25 +1,7 @@
-<!-- <h1>{{show && show.date}}</h1>
-<h1>{{show && show.venue}}</h1>
-
-<table class="table table-striped" *ngIf="show">
-  <thead>
-    <tr>
-      <th>Artists</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let artist of show.artists">
-      <td>{{artist.name}}</td>
-    </tr>
-  </tbody>
-</table> -->
-
 <div *ngIf="profileForm" style="margin-top: 15px; padding-left: 15px;
   padding-right: 15px;">
   <form [formGroup]="profileForm" (ngSubmit)="onSubmit()"
     class="needs-validation" novalidate>
-
-    <!-- <h6>Event Date/Venue</h6> -->
 
     <div class="form-group">
       <label for="date">Event Date</label>
@@ -28,6 +10,7 @@
         <input class="form-control" placeholder="yyyy-mm-dd"
           name="dp" [formControl]="profileForm.controls['date']" ngbDatepicker
           #d="ngbDatepicker">
+
         <div class="input-group-append">
           <button class="btn btn-outline-secondary calendar"
             (click)="d.toggle()"
@@ -66,8 +49,6 @@
           {{knownArtistsMatches.length}} Known Artists Matches
         </div> -->
     <div formArrayName="artists" class="clearfix">
-      <!-- <h6>Artists</h6> -->
-
       <div *ngFor="let artist of artists.controls; let i=index">
         <div class="form-group" [formGroupName]="i">
           <label for="artistName">Artist Name</label>
@@ -89,27 +70,6 @@
       </button>
     </div>
 
-    <!-- <div class="form-group">
-          <label
-            for="isSoldOutCheckBox">
-            <input type="checkbox"
-              id="isSoldOutCheckBox"
-              formControlName="isSoldOut"
-              />
-            Sold Out
-          </label>
-        </div>
-      
-        <div class="form-group">
-          <label
-            for="isCancelledCheckBox">
-            <input type="checkbox"
-              id="isCancelledCheckBox"
-              formControlName="isCancelled"
-              />
-            Cancelled
-          </label>
-        </div> -->
     <div class="form-check form-check-inline">
       <input class="form-check-input" type="checkbox" id="isSoldOutCheckBox"
         formControlName="isSoldOut">
@@ -121,24 +81,6 @@
       <label class="form-check-label" for="isCancelledCheckBox">Cancelled</label>
     </div>
 
-    <!-- <div formArrayName="artists">
-          <h5>Artists</h5>
-      
-          <div *ngFor="let artist of artists.controls; let i=index">
-            <div class="form-group" [formGroupName]="i">
-              <label for="artistName">Name</label>
-              <input formControlName="name" type="text" class="form-control"
-                id="artistName" aria-describedby="artistNameHelp"
-                required
-                [ngbTypeahead]="searchKnownArtists">
-              <div *ngIf="artist.get('name').invalid &&
-                (artist.get('name').dirty || artist.get('name').touched)"
-                class="alert alert-danger">
-                Please choose an Artist Name.
-              </div>
-            </div>
-          </div>
-        </div> -->
     <div>
       <hr />
     </div>
@@ -163,6 +105,8 @@
 
     <br />
     <br />
+
+    <!-- <pre>{{ profileForm.value | json }}</pre> -->
   </form>
 
   <div>
@@ -180,10 +124,7 @@
     <hr />
 
     <div>
-      <!-- <a class="btn btn-primary btn-sm"
-            href="https://snerks.github.io/recommended-shows-ng01/" role="button">View
-            All Shows ({{showsInfo ? showsInfo.shows.length : 0}})</a> -->
-      <a routerLink="/list" class="btn btn-outline-primary btn-lg btn-block"
+      <a routerLink="/list/0" class="btn btn-outline-primary btn-lg btn-block"
         href="#"
         role="button">
         View All Shows ({{showsInfo ? showsInfo.shows.length : 0}})

@@ -11,7 +11,7 @@ const routes: Routes = [
   { path: "", redirectTo: "/home", pathMatch: "full" },
   { path: "home", component: HomeComponent },
   { path: "create", component: ProfileEditorComponent },
-  { path: "list", component: ShowlistComponent },
+  { path: "list/:days", component: ShowlistComponent },
   { path: "detail/:id", component: ShowdetailComponent },
   // { path: "detail", component: ShowdetailComponent }
   { path: "showconfirmdelete/:id", component: ShowConfirmDeleteComponent }
