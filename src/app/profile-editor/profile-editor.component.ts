@@ -93,8 +93,8 @@ export class ProfileEditorComponent implements OnInit {
 
   ngOnInit() {
     const getSuccessFn = (showsInfo: ShowsInfo) => {
-      console.log("getShowsInfo:getSuccessFn");
-      console.log(showsInfo);
+      // console.log("getShowsInfo:getSuccessFn");
+      // console.log(showsInfo);
 
       this.showsInfo = showsInfo;
 
@@ -120,14 +120,14 @@ export class ProfileEditorComponent implements OnInit {
     };
 
     const getErrorFn = (error: any) => {
-      console.log("getShowsInfo:errorFn");
-      console.log(error);
+      // console.log("getShowsInfo:errorFn");
+      // console.log(error);
 
       this.errorMessage = error.message;
     };
 
     const getCompleteFn = () => {
-      console.log("getShowsInfo:completeFn");
+      // console.log("getShowsInfo:completeFn");
     };
 
     this.showService
@@ -221,8 +221,8 @@ export class ProfileEditorComponent implements OnInit {
     }
 
     const getSuccessFn = (showsInfo: ShowsInfo) => {
-      console.log("getShowsInfo:getSuccessFn");
-      console.log(showsInfo);
+      // console.log("getShowsInfo:getSuccessFn");
+      // console.log(showsInfo);
 
       showsInfo.shows.forEach(showForUuid => {
         if (!showForUuid.id) {
@@ -244,21 +244,21 @@ export class ProfileEditorComponent implements OnInit {
       this.sortShows(showsInfo);
 
       const putSuccessFn = (nextShowsInfo: ShowsInfo) => {
-        console.log("putShowsInfo:successFn");
-        console.log(nextShowsInfo);
+        // console.log("putShowsInfo:successFn");
+        // console.log(nextShowsInfo);
 
         this.showsInfo = nextShowsInfo;
       };
 
       const putErrorFn = (error: any) => {
-        console.log("putShowsInfo:errorFn");
-        console.log(error);
+        // console.log("putShowsInfo:errorFn");
+        // console.log(error);
 
         this.errorMessage = error.message;
       };
 
       const putCompleteFn = () => {
-        console.log("putShowsInfo:completeFn");
+        // console.log("putShowsInfo:completeFn");
 
         this.isUpdating = false;
       };
@@ -282,15 +282,16 @@ export class ProfileEditorComponent implements OnInit {
     };
 
     const getErrorFn = (error: any) => {
-      console.log("getShowsInfo:errorFn");
-      console.log(error);
+      // console.log("getShowsInfo:errorFn");
+      // console.log(error);
 
       this.isUpdating = false;
       this.errorMessage = error.message;
     };
 
     const getCompleteFn = () => {
-      console.log("getShowsInfo:completeFn");
+      // console.log("getShowsInfo:completeFn");
+
       this.isUpdating = false;
     };
 
