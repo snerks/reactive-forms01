@@ -90,6 +90,15 @@
             <ng-template #venueNoLink>{{show.venue}}</ng-template>
           </td>
           <td>
+            <a routerLink="/detail/{{show.id}}" class="btn btn-outline-primary
+              btn-sm btn-block"
+              href="#"
+              role="button"
+              title="Edit">
+              <i class="fa fa-edit"></i>
+            </a>
+          </td>
+          <td>
             <span *ngIf="show.isSoldOut" class="badge badge-warning"
               style="margin-right: 10px;">
               Sold Out
@@ -108,21 +117,13 @@
             <span *ngIf="show.notes" style="margin-right: 10px;">{{show.notes}}</span>
           </td>
           <td>
-            <a routerLink="/detail/{{show.id}}" class="btn btn-outline-primary
-              btn-sm btn-block"
-              href="#"
-              role="button">
-              <i class="fa fa-edit" style="margin-right: 10px;"></i> Edit
-            </a>
-          </td>
-          <td>
-            <a routerLink="/showconfirmdelete/{{show.id}}" class="btn
+            <!-- <a routerLink="/showconfirmdelete/{{show.id}}" class="btn
               btn-outline-primary
               btn-sm btn-block"
               href="#"
               role="button">
               <i class="fa fa-trash" style="margin-right: 10px;"></i> Delete
-            </a>
+            </a> -->
           </td>
         </tr>
       </tbody>
