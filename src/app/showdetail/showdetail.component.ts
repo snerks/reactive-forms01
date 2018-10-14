@@ -207,8 +207,8 @@ export class ShowdetailComponent implements OnInit {
         )
       ),
 
-      isSoldOut: [this.show.isSoldOut],
-      isCancelled: [this.show.isCancelled]
+      isSoldOut: [!!this.show.isSoldOut],
+      isCancelled: [!!this.show.isCancelled]
     });
 
     return showFormGroup;

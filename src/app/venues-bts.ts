@@ -279,7 +279,7 @@ export const VenueKeyMap = [
   },
   {
     key: 649,
-    venueBts: { id: 649, name: "Rough Trade", nameRaw: "Rough Trade" }
+    venueBts: { id: 649, name: "Rough Trade Bristol", nameRaw: "Rough Trade" }
   },
   {
     key: 555,

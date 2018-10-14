@@ -63,7 +63,7 @@ export class ShowConfirmDeleteComponent implements OnInit {
   }
 
   cancelDeleteShow() {
-    this.router.navigate(["/list"]);
+    this.router.navigate(["/list/0"]);
   }
 
   deleteShow() {
@@ -130,7 +130,7 @@ export class ShowConfirmDeleteComponent implements OnInit {
 
         this.showsInfo = nextShowsInfo;
 
-        this.router.navigate(["/list"]);
+        this.router.navigate(["/list/0"]);
       };
 
       const putErrorFn = (error: any) => {
