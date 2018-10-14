@@ -36,6 +36,8 @@ export class ShowdetailComponent implements OnInit {
   //   isCancelled: [false]
   // });
 
+  profileForm: FormGroup;
+
   isUpdating: boolean;
   errorMessage: string;
 
@@ -120,6 +122,8 @@ export class ShowdetailComponent implements OnInit {
       uniqueShowsArtistNames.sort();
 
       this.knownArtists = uniqueShowsArtistNames;
+
+      this.profileForm = this.getProfileForm();
     };
 
     const getErrorFn = (error: any) => {
@@ -155,7 +159,7 @@ export class ShowdetailComponent implements OnInit {
     return null;
   }
 
-  get profileForm(): FormGroup {
+  getProfileForm(): FormGroup {
     if (!this.show) {
       return this.fb.group({
         id: [this.getNewGuidV4()],
@@ -323,8 +327,24 @@ export class ShowdetailComponent implements OnInit {
 
       showsInfo.lastUpdated = new Date();
 
+      // if (!isCleanupRequired) {
+      //   showsInfo.shows.push(show);
+      // }
+
       if (!isCleanupRequired) {
-        showsInfo.shows.push(show);
+        const showToUpdate = showsInfo.shows.find(
+          showToFind => showToFind.id === show.id
+        );
+
+        if (showToUpdate) {
+          showToUpdate.date = show.date;
+          showToUpdate.venue = show.venue;
+
+          showToUpdate.artists = show.artists;
+
+          showToUpdate.isSoldOut = show.isSoldOut;
+          showToUpdate.isCancelled = show.isCancelled;
+        }
       }
 
       this.sortShows(showsInfo);

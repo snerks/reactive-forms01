@@ -11,6 +11,7 @@ import { AppRoutingModule } from "./app-routing.module";
 import { HomeComponent } from "./home/home.component";
 import { ShowlistComponent } from "./showlist/showlist.component";
 import { ShowdetailComponent } from './showdetail/showdetail.component';
+import { ShowConfirmDeleteComponent } from './show-confirm-delete/show-confirm-delete.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { ShowdetailComponent } from './showdetail/showdetail.component';
     ProfileEditorComponent,
     HomeComponent,
     ShowlistComponent,
-    ShowdetailComponent
+    ShowdetailComponent,
+    ShowConfirmDeleteComponent
   ],
   imports: [
     AppRoutingModule,
