@@ -130,6 +130,8 @@ export class ShowConfirmDeleteComponent implements OnInit {
 
         this.showsInfo = nextShowsInfo;
 
+        this.showService.ShowsInfo = nextShowsInfo;
+
         this.router.navigate(["/list/0"]);
       };
 

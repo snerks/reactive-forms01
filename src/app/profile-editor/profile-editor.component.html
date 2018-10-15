@@ -137,17 +137,31 @@
           The event details are valid!
         </div> 
         -->
-    <button type="submit" class="btn btn-success btn-sm float-right"
+    <!-- <button type="submit" class="btn btn-success btn-sm float-right"
       style="margin-bottom: 15px;"
       (click)="submitShow()"
-      [disabled]="!profileForm.valid">Save</button>
+      [disabled]="!profileForm.valid">Save</button> -->
+    <div class="float-right">
+      <button type="button" class="btn btn-success btn-sm"
+        style="margin: 5px;"
+        (click)="submitShow()"
+        [disabled]="!profileForm.valid">
+        OK
+      </button>
+
+      <button type="button" class="btn btn-outline-secondary btn-sm"
+        style="margin: 5px;"
+        (click)="cancelAddShow()">
+        Cancel
+      </button>
+    </div>
 
     <br />
     <br />
   </form>
 
   <div>
-    <div>
+    <!-- <div>
       <span class="badge badge-info">{{addedTodayShows.length}}</span>
       <span> new today </span>
 
@@ -161,16 +175,12 @@
     <hr />
 
     <div>
-      <!-- <a class="btn btn-primary btn-sm"
-            href="https://snerks.github.io/recommended-shows-ng01/" role="button">View
-            All Shows ({{showsInfo ? showsInfo.shows.length : 0}})</a> -->
       <a routerLink="/list/0" class="btn btn-outline-primary btn-lg btn-block"
         href="#"
         role="button">
         View All Shows ({{showsInfo ? showsInfo.shows.length : 0}})
       </a>
-    </div>
-
+    </div> -->
     <div *ngIf="isUpdating">
       Updating...
     </div>

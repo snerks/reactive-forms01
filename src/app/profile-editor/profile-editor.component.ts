@@ -1,6 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 // import { FormGroup, FormControl } from "@angular/forms";
 import { FormBuilder, Validators, FormArray } from "@angular/forms";
+import { Location } from "@angular/common";
+
 import { NgbDateAdapter } from "@ng-bootstrap/ng-bootstrap";
 import { v1, v4 } from "uuid";
 
@@ -11,6 +13,7 @@ import { ShowsInfo, Show } from "../models";
 import { Observable } from "rxjs";
 import { debounceTime, distinctUntilChanged, map } from "rxjs/operators";
 import { VenueKeyMap } from "../venues-bts";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-profile-editor",
@@ -84,7 +87,12 @@ export class ProfileEditorComponent implements OnInit {
       // tslint:disable-next-line:semicolon
     );
 
-  constructor(private fb: FormBuilder, private showService: ShowService) {}
+  constructor(
+    private fb: FormBuilder,
+    private router: Router,
+    private location: Location,
+    private showService: ShowService
+  ) {}
 
   flattenNestedArray<T>(array: T[][]): T[] {
     const flat = [].concat(...array);
@@ -206,6 +214,10 @@ export class ProfileEditorComponent implements OnInit {
     });
   }
 
+  cancelAddShow() {
+    this.location.back();
+  }
+
   submitShow() {
     this.isUpdating = true;
     this.errorMessage = null;
@@ -247,6 +259,10 @@ export class ProfileEditorComponent implements OnInit {
         // console.log(nextShowsInfo);
 
         this.showsInfo = nextShowsInfo;
+
+        this.showService.ShowsInfo = nextShowsInfo;
+
+        this.router.navigate(["/list/1"]);
       };
 
       const putErrorFn = (error: any) => {

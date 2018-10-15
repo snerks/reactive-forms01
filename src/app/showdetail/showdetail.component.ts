@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
+import { Location } from "@angular/common";
 
 import { ShowService } from "../show.service";
 import { ShowsInfo, Show } from "../models";
@@ -90,6 +91,8 @@ export class ShowdetailComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
+    private location: Location,
     private fb: FormBuilder,
     private showService: ShowService
   ) {}
@@ -297,6 +300,10 @@ export class ShowdetailComponent implements OnInit {
     });
   }
 
+  cancelUpdateShow() {
+    this.location.back();
+  }
+
   submitShow() {
     this.isUpdating = true;
     this.errorMessage = null;
@@ -354,6 +361,11 @@ export class ShowdetailComponent implements OnInit {
         // console.log(nextShowsInfo);
 
         this.showsInfo = nextShowsInfo;
+
+        this.showService.ShowsInfo = nextShowsInfo;
+
+        // this.router.navigate(["/list/0"]);
+        this.location.back();
       };
 
       const putErrorFn = (error: any) => {

@@ -1,4 +1,5 @@
-<div class="alert alert-danger" role="alert">
+<div *ngIf="isUpdating">Updating...</div>
+<div *ngIf="!isUpdating" class="alert alert-danger" role="alert">
   <h6>Are you sure you want to delete this show?</h6>
 
   <div *ngIf="show">

@@ -45,6 +45,21 @@
             </div>
           </div>
         </div>
+        <div class="col-1">
+          <a routerLink="/" class="btn btn-outline-secondary btn-sm"
+            href="#"
+            role="button"
+            title="Home"
+            style="margin-right: 5px;">
+            <i class="fa fa-home"></i>
+          </a>
+          <a routerLink="/create" class="btn btn-primary btn-sm"
+            href="#"
+            role="button"
+            title="Add New Show">
+            <i class="fa fa-plus-circle"></i>
+          </a>
+        </div>
       </div>
     </form>
 
@@ -99,6 +114,16 @@
             </a>
           </td>
           <td>
+            <a routerLink="/showconfirmdelete/{{show.id}}" class="btn
+              btn-outline-primary
+              btn-sm btn-block"
+              href="#"
+              role="button"
+              title="Delete">
+              <i class="fa fa-trash"></i>
+            </a>
+          </td>
+          <td>
             <span *ngIf="show.isSoldOut" class="badge badge-warning"
               style="margin-right: 10px;">
               Sold Out
@@ -115,15 +140,6 @@
             </span>
 
             <span *ngIf="show.notes" style="margin-right: 10px;">{{show.notes}}</span>
-          </td>
-          <td>
-            <!-- <a routerLink="/showconfirmdelete/{{show.id}}" class="btn
-              btn-outline-primary
-              btn-sm btn-block"
-              href="#"
-              role="button">
-              <i class="fa fa-trash" style="margin-right: 10px;"></i> Delete
-            </a> -->
           </td>
         </tr>
       </tbody>
