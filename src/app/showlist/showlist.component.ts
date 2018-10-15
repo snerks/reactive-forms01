@@ -103,6 +103,18 @@ export class ShowlistComponent implements OnInit {
     return results;
   }
 
+  getEventIdBtsForUrl(show: Show): string {
+    if (!show) {
+      return "";
+    }
+
+    if (!show.eventIdBts) {
+      return "";
+    }
+
+    return show.eventIdBts.toString().trim();
+  }
+
   get sortedShows(): Show[] {
     const results = this.artistFilterShows.sort((lhs: Show, rhs: Show) => {
       const lhsDate = new Date(lhs.date);

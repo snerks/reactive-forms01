@@ -179,7 +179,11 @@ export class ShowdetailComponent implements OnInit {
         ]),
 
         isSoldOut: [false],
-        isCancelled: [false]
+        isCancelled: [false],
+
+        notes: [""],
+        priceText: [""],
+        eventIdBts: [""]
       });
     }
 
@@ -211,7 +215,11 @@ export class ShowdetailComponent implements OnInit {
       ),
 
       isSoldOut: [!!this.show.isSoldOut],
-      isCancelled: [!!this.show.isCancelled]
+      isCancelled: [!!this.show.isCancelled],
+
+      notes: [this.show.notes || ""],
+      priceText: [this.show.priceText || ""],
+      eventIdBts: [this.show.eventIdBts || ""]
     });
 
     return showFormGroup;
@@ -351,6 +359,10 @@ export class ShowdetailComponent implements OnInit {
 
           showToUpdate.isSoldOut = show.isSoldOut;
           showToUpdate.isCancelled = show.isCancelled;
+
+          showToUpdate.notes = show.notes;
+          showToUpdate.priceText = show.priceText;
+          showToUpdate.eventIdBts = show.eventIdBts;
         }
       }
 

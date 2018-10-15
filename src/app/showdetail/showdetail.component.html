@@ -51,7 +51,7 @@
     <div formArrayName="artists" class="clearfix">
       <div *ngFor="let artist of artists.controls; let i=index">
         <div class="form-group" [formGroupName]="i">
-          <label for="artistName">Artist Name</label>
+          <label for="artistName">Artist Name {{i + 1}}</label>
           <input formControlName="name" type="text" class="form-control"
             id="artistName" aria-describedby="artistNameHelp"
             required
@@ -68,6 +68,41 @@
         (click)="addArtist()">
         Add Artist
       </button>
+    </div>
+
+    <div class="form-group">
+      <label for="notes">Notes</label>
+      <input formControlName="notes" type="text" class="form-control"
+        id="notes" aria-describedby="notesHelp">
+      <div *ngIf="profileForm.get('notes').invalid &&
+        (profileForm.get('notes').dirty || profileForm.get('notes').touched)"
+        class="alert alert-danger">
+        Please add some notes.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="priceText">Price</label>
+      <input formControlName="priceText" type="text" class="form-control"
+        id="priceText" aria-describedby="priceTextHelp">
+      <div *ngIf="profileForm.get('priceText').invalid &&
+        (profileForm.get('priceText').dirty ||
+        profileForm.get('priceText').touched)"
+        class="alert alert-danger">
+        Please add price details.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="eventIdBts">BTS Id</label>
+      <input formControlName="eventIdBts" type="text" class="form-control"
+        id="eventIdBts" aria-describedby="eventIdBtsHelp">
+      <div *ngIf="profileForm.get('eventIdBts').invalid &&
+        (profileForm.get('eventIdBts').dirty ||
+        profileForm.get('eventIdBts').touched)"
+        class="alert alert-danger">
+        Please add BTS Id.
+      </div>
     </div>
 
     <div class="form-check form-check-inline">
@@ -104,7 +139,8 @@
       [disabled]="!profileForm.valid">Save</button> -->
     <div class="float-right">
       <button type="button" class="btn btn-success btn-sm"
-        style="margin: 5px;"
+        [ngStyle]="{'cursor': profileForm.valid ? 'pointer' : 'not-allowed',
+        margin: '5px' }"
         (click)="submitShow()"
         [disabled]="!profileForm.valid">
         OK

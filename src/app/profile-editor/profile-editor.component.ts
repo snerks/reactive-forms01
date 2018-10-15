@@ -34,7 +34,11 @@ export class ProfileEditorComponent implements OnInit {
     ]),
 
     isSoldOut: [false],
-    isCancelled: [false]
+    isCancelled: [false],
+
+    notes: "",
+    priceText: "",
+    eventIdBts: ""
   });
 
   isUpdating: boolean;

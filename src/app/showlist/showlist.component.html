@@ -100,8 +100,29 @@
             </p>
           </td>
           <td>
-            <div *ngIf="show.detailsUri;then venueLink else venueNoLink"></div>
-            <ng-template #venueLink><a [attr.href]="show.detailsUri">{{show.venue}}</a></ng-template>
+            <!-- <div *ngIf="show.detailsUri;then detailsLink else eventIdLink"></div>
+            <ng-template #detailsLink><a [attr.href]="show.detailsUri">{{show.venue}}</a></ng-template> 
+          -->
+            <div *ngIf="show.eventIdBts;then eventIdLink else noEventIdBtsLink"></div>
+            <ng-template #eventIdLink>
+              <div *ngIf="show.eventIdBts;then eventIdBtsLink else venueNoLink"></div>
+              <ng-template #eventIdBtsLink>
+                <a
+                  attr.href="{{'https://www.bristolticketshop.co.uk/eventdetails.aspx?e='
+                  + getEventIdBtsForUrl(show)}}">
+                  {{show.venue}}
+                </a>
+                <!-- eventIdBts = [{{show.eventIdBts}}]
+                eventIdBtsTrimmed = [{{getEventIdBtsForUrl(show)}}] -->
+                <!-- {{show.venue}} -->
+              </ng-template>
+            </ng-template>
+
+            <ng-template #noEventIdBtsLink>
+              <div *ngIf="show.detailsUri;then detailsLink else venueNoLink"></div>
+            </ng-template>
+
+            <ng-template #detailsLink><a [attr.href]="show.detailsUri">{{show.venue}}</a></ng-template>
             <ng-template #venueNoLink>{{show.venue}}</ng-template>
           </td>
           <td>
