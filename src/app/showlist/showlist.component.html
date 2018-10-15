@@ -6,7 +6,7 @@
 
     <form style="margin: 10px 15px 10px 15px;">
       <div class="form-row">
-        <div class="col-6">
+        <div class="col-5">
           <label
             class="sr-only"
             htmlFor="inlineFormInputGroupUsername2">
@@ -49,10 +49,11 @@
           <a routerLink="/" class="btn btn-outline-secondary btn-sm"
             href="#"
             role="button"
-            title="Home"
-            style="margin-right: 5px;">
+            title="Home">
             <i class="fa fa-home"></i>
           </a>
+        </div>
+        <div class="col-1">
           <a routerLink="/create" class="btn btn-primary btn-sm"
             href="#"
             role="button"
@@ -70,7 +71,6 @@
           <th>Date</th>
           <th>Artists</th>
           <th>Venue</th>
-          <th>&#160;</th>
           <th>&#160;</th>
           <th>&#160;</th>
         </tr>
@@ -105,23 +105,24 @@
             <ng-template #venueNoLink>{{show.venue}}</ng-template>
           </td>
           <td>
-            <a routerLink="/detail/{{show.id}}" class="btn btn-outline-primary
-              btn-sm btn-block"
-              href="#"
-              role="button"
-              title="Edit">
-              <i class="fa fa-edit"></i>
-            </a>
-          </td>
-          <td>
-            <a routerLink="/showconfirmdelete/{{show.id}}" class="btn
-              btn-outline-primary
-              btn-sm btn-block"
-              href="#"
-              role="button"
-              title="Delete">
-              <i class="fa fa-trash"></i>
-            </a>
+            <div style="padding: 3px;">
+              <a routerLink="/detail/{{show.id}}"
+                class="btn btn-outline-primary btn-sm"
+                href="#"
+                role="button"
+                title="Edit">
+                <i class="fa fa-edit"></i>
+              </a>
+            </div>
+            <!-- <div style="padding: 3px;">
+              <a routerLink="/showconfirmdelete/{{show.id}}"
+                class="btn btn-outline-primary btn-sm"
+                href="#"
+                role="button"
+                title="Delete">
+                <i class="fa fa-trash"></i>
+              </a>
+            </div> -->
           </td>
           <td>
             <span *ngIf="show.isSoldOut" class="badge badge-warning"
