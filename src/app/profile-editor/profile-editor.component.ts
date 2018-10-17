@@ -235,6 +235,14 @@ export class ProfileEditorComponent implements OnInit {
       show.id = this.getNewGuidV4();
     }
 
+    // TODO
+    // Artist Name etc.
+    show.notes = show.notes.trim() === "" ? undefined : show.notes.trim();
+    show.priceText =
+      show.priceText.trim() === "" ? undefined : show.priceText.trim();
+    show.eventIdBts =
+      show.eventIdBts.trim() === "" ? undefined : show.eventIdBts.trim();
+
     const getSuccessFn = (showsInfo: ShowsInfo) => {
       // console.log("getShowsInfo:getSuccessFn");
       // console.log(showsInfo);

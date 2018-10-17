@@ -360,9 +360,12 @@ export class ShowdetailComponent implements OnInit {
           showToUpdate.isSoldOut = show.isSoldOut;
           showToUpdate.isCancelled = show.isCancelled;
 
-          showToUpdate.notes = show.notes;
-          showToUpdate.priceText = show.priceText;
-          showToUpdate.eventIdBts = show.eventIdBts;
+          showToUpdate.notes =
+            show.notes.trim() === "" ? undefined : show.notes.trim();
+          showToUpdate.priceText =
+            show.priceText.trim() === "" ? undefined : show.priceText.trim();
+          showToUpdate.eventIdBts =
+            show.eventIdBts.trim() === "" ? undefined : show.eventIdBts.trim();
         }
       }
 
