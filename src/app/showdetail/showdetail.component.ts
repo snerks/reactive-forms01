@@ -362,10 +362,22 @@ export class ShowdetailComponent implements OnInit {
 
           showToUpdate.notes =
             show.notes.trim() === "" ? undefined : show.notes.trim();
+
           showToUpdate.priceText =
             show.priceText.trim() === "" ? undefined : show.priceText.trim();
-          showToUpdate.eventIdBts =
-            show.eventIdBts.trim() === "" ? undefined : show.eventIdBts.trim();
+
+          if (show.eventIdBts) {
+            if (show.eventIdBts.trim) {
+              showToUpdate.eventIdBts =
+                show.eventIdBts.trim() === ""
+                  ? undefined
+                  : show.eventIdBts.trim();
+            } else {
+              showToUpdate.eventIdBts = show.eventIdBts;
+            }
+          } else {
+            showToUpdate.eventIdBts = undefined;
+          }
         }
       }
 
