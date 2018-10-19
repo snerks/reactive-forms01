@@ -174,7 +174,8 @@ export class ShowdetailComponent implements OnInit {
         date: ["", Validators.required],
         artists: this.fb.array([
           this.fb.group({
-            name: ["", Validators.required]
+            name: ["", Validators.required],
+            stageTime: [""]
           })
         ]),
 
@@ -210,7 +211,10 @@ export class ShowdetailComponent implements OnInit {
 
       artists: this.fb.array(
         this.show.artists.map(artist =>
-          this.fb.group({ name: [artist.name, Validators.required] })
+          this.fb.group({
+            name: [artist.name, Validators.required],
+            stageTime: [artist.stageTime]
+          })
         )
       ),
 
