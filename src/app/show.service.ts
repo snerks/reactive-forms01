@@ -15,8 +15,9 @@ export class ShowService {
   private showsInfoGithubUrl =
     "https://snerks.github.io/recommended-shows-ts01/recommended-shows.json";
 
-  private showsInfoUrl = "https://api.myjson.com/bins/6blgs";
+  // private showsInfoUrl = "https://api.myjson.com/bins/6blgs";
   // private showsInfoUrl = "https://api.myjson.com/bins/BOGUS";
+  private showsInfoUrl = "https://show01-cd72d.firebaseio.com/.json";
 
   showsInfo: ShowsInfo = null;
   errorMessage: string;
